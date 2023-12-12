@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    String @id  @unique
+  name  String
+  password String
+
+  role  Role   @default(USER)
+
+  competitor Competitor?
+
+  vote Vote?
+
+  @@map("users")
+}
+
+model Vote {
+  id    String @id @default(cuid())
+  user  User   @relation(fields: [userId], references: [id])
+  userId String @unique
+  competitor  Competitor   @relation(fields: [competitorId], references: [id])
+  competitorId String 
+
+  @@map("votes")
+}
+
+model Competitor {
+  id    String @id @default(cuid())
+  name  String
+  email String? @unique
+  phone String? @unique
+  photoUrl String?
+  semester String @default("5")
+  description String?
+  isWinner Boolean @default(false)
+  voteCount Int @default(0)
+
+  user  User   @relation(fields: [userId], references: [id])
+  userId String @unique
+  votes Vote[]
+
+  @@map("competitors")
+}
+
+
+enum Role {
+  USER
+  ADMIN
+  COMPETITOR
+}
