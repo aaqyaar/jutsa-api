@@ -49,8 +49,8 @@ yarn start:prod
 | `GET`  | /api/auth/logout     | Logout current user             |
 | `GET`  | /api/users           | Get all users                   |
 | `GET`  | /api/users/:id       | Get a user                      |
-| `POST` | /api/competitors     | Create a competitor             |
-| `GET`  | /api/competitors     | Get all competitors             |
+| `POST` | /api/competitor     | Create a competitor             |
+| `GET`  | /api/competitor     | Get all competitors             |
 | `GET`  | /api/competitors/:id | Get a competitor                |
 | `POST` | /api/votes           | Create a vote                   |
 | `GET`  | /api/votes           | Get all votes                   |
