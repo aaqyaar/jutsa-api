@@ -95,7 +95,6 @@ export class AuthService {
       where: {
         id: payload.id,
       },
-      include: { competitor: true, vote: true },
     });
 
     if (!user) {
