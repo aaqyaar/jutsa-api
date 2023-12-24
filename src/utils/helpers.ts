@@ -19,3 +19,17 @@ export const formatPrismaError = (error: string, isError = true) => {
       return 'Internal server error';
   }
 };
+
+//
+export const excludeFields = <T>(
+  obj: T,
+  fields: Array<keyof T>,
+): Partial<T> => {
+  const newObj = { ...obj };
+  fields.forEach((field) => delete newObj[field]);
+  return newObj;
+};
+
+export const excludeFieldsFromArr = <T>(arr: T[], fields: Array<keyof T>) => {
+  return arr.map((obj) => excludeFields(obj, fields));
+};

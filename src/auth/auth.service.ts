@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { LoginDto, RegisterDto } from './dto/auth.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { verifyPassword, hashPassword } from 'src/utils/helpers';
+import { verifyPassword, hashPassword, excludeFields } from 'src/utils/helpers';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from 'src/types/auth';
 import { Request } from 'express';
@@ -101,6 +101,6 @@ export class AuthService {
       throw new NotFoundException('User not found');
     }
 
-    return user;
+    return excludeFields(user, ['password']);
   }
 }
